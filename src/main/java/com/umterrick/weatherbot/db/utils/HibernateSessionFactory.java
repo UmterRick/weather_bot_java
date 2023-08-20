@@ -5,7 +5,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
-
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 
 @Slf4j
@@ -13,7 +12,8 @@ public class HibernateSessionFactory {
     private static StandardServiceRegistry registry;
     private static SessionFactory sessionFactory;
 
-    private HibernateSessionFactory() {}
+    private HibernateSessionFactory() {
+    }
 
     public static SessionFactory getSessionFactory() {
         if (sessionFactory == null) {

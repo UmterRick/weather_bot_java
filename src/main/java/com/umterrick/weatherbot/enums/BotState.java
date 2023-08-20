@@ -13,6 +13,4 @@ public enum BotState {
     SHOW_HELP_MENU,
 
 
-
-
 }

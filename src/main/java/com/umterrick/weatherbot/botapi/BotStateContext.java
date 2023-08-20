@@ -34,7 +34,7 @@ public class BotStateContext {
     }
 
     private boolean isCommandState(BotState currentState) {
-        switch (currentState){
+        switch (currentState) {
             case START:
             case HELP:
                 return true;

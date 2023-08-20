@@ -1,11 +1,12 @@
 package com.umterrick.weatherbot.botapi.handlers;
 
-import com.umterrick.weatherbot.enums.BotState;
 import com.umterrick.weatherbot.botapi.BotStateContext;
+import com.umterrick.weatherbot.enums.BotState;
 import lombok.extern.slf4j.Slf4j;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+
 @Slf4j
 public class TelegramMessageHandler {
     private BotStateContext botStateContext;

@@ -9,8 +9,6 @@ public class HandleCommand implements InputMessageHandler {
     public SendMessage handle(Message message) {
 
 
-
-
         return null;
     }
 

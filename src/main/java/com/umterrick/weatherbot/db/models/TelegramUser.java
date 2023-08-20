@@ -23,9 +23,8 @@ public class TelegramUser extends BaseModel {
     private BotState state;
 
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = {CascadeType.ALL})
     private List<City> cities;
-
 
 
     public TelegramUser(String username, long chat_id) {

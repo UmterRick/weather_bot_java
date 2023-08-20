@@ -1,6 +1,9 @@
 package com.umterrick.weatherbot.db.models;
 
-import jakarta.persistence.*;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Getter;
 
@@ -8,7 +11,7 @@ import java.util.List;
 
 
 @Entity
-@Table (name = "cities")
+@Table(name = "cities")
 @Getter
 @Data
 //@RequiredArgsConstructor
@@ -18,7 +21,7 @@ public class City extends BaseModel{
     private String country;
     private String name;
 
-    @ManyToMany(mappedBy = "cities", cascade = { CascadeType.ALL })
+    @ManyToMany(mappedBy = "cities", cascade = {CascadeType.ALL})
     private List<TelegramUser> users;
 
 

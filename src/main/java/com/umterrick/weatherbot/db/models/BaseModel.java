@@ -9,7 +9,7 @@ import lombok.Getter;
 import java.util.UUID;
 
 @MappedSuperclass
-public class BaseModel {
+public abstract class BaseModel {
 
     @Getter
     @Id

@@ -16,8 +16,6 @@ import java.util.List;
 @Data
 //@RequiredArgsConstructor
 public class City extends BaseModel{
-    @Id
-    private Long id;
     private String country;
     private String name;
 

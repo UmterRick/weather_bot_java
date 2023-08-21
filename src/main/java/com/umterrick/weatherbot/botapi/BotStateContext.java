@@ -15,9 +15,7 @@ public class BotStateContext {
     private Map<BotState, InputMessageHandler> messageHandlers = new HashMap<>();
 
     public BotStateContext(List<InputMessageHandler> messageHandlers) {
-
         messageHandlers.forEach(handler -> this.messageHandlers.put(handler.getHandlerName(), handler));
-
     }
 
     public SendMessage processInputMessage(BotState currentState, Message message) {

@@ -14,12 +14,16 @@ import java.util.List;
 public class TelegramUser extends BaseModel {
 
     @Id
-    private Long id;
+    private long chatId;
+    @Column
     private String username;
 
+    @Column
+    @ManyToOne
+    private City mainCity;
 
-    private long chat_id;
 
+    @Column
     private BotState state;
 
 
@@ -27,9 +31,9 @@ public class TelegramUser extends BaseModel {
     private List<City> cities;
 
 
-    public TelegramUser(String username, long chat_id) {
+    public TelegramUser(String username, long chatId) {
         this.username = username;
-        this.chat_id = chat_id;
+        this.chatId = chatId;
     }
 
     public TelegramUser() {
@@ -46,7 +50,7 @@ public class TelegramUser extends BaseModel {
 
     @Override
     public String toString() {
-        return "TelegramUser{id=" + getId() + ", username=" + username + ", chatId=" + chat_id + "}";
+        return "TelegramUser{id=" + getId() + ", username=" + username + ", chatId=" + chatId + "}";
     }
 
 }

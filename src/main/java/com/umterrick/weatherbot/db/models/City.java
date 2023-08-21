@@ -15,7 +15,7 @@ import java.util.List;
 @Getter
 @Data
 //@RequiredArgsConstructor
-public class City extends BaseModel{
+public class City extends BaseModel {
     private String country;
     private String name;
 

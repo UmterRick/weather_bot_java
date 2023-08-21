@@ -34,6 +34,12 @@ public class HandleFacade {
         BotState botState;
         SendMessage replyMessage;
 
+
+        if (!inputMessageText.startsWith("/")) {
+            botState = user.getState();
+            replyMessage = botStateContext.processInputMessage(botState, message);
+            return replyMessage;
+        }
         String commandInMessage = inputMessageText.substring(1).toUpperCase();
         BotCommands botCommand = BotCommands.valueOf(commandInMessage);
         botState = switch (botCommand) {
@@ -48,3 +54,4 @@ public class HandleFacade {
 
     }
 }
+

@@ -1,5 +1,6 @@
 package com.umterrick.weatherbot.service;
 
+import com.umterrick.weatherbot.botapi.BotStateContext;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
@@ -10,11 +11,14 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Component
 public class WeatherTelegramBot extends TelegramLongPollingBot {
+
+    private final BotStateContext botStateContext;
     @Value("${bot.Name")
     String BOT_NAME;
 
-    public WeatherTelegramBot(@Value("${bot.token}") String botToken) {
+    public WeatherTelegramBot(@Value("${bot.token}") String botToken, BotStateContext botStateContext) {
         super(botToken);
+        this.botStateContext = botStateContext;
     }
 
     @Override
@@ -24,6 +28,7 @@ public class WeatherTelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+
     }
 
     private void startCommandResponse(long chatId, String userName) {

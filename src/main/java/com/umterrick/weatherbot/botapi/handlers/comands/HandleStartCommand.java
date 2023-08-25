@@ -31,17 +31,19 @@ public class HandleStartCommand implements InputMessageHandler {
         TelegramUser user = userRepository.findByChatId(userId);
 
         String replyText;
-        if (user != null) {
+        if (user.getMainCity() != null) {
             replyText = "З поверненням, " + user.getUsername() + "!";
+            user.setState(BotState.SAVE_MAIN_CITY);
         } else {
             String username = message.getFrom().getUserName();
             user = new TelegramUser(username, chatId);
             userRepository.save(user);
+            user.setState(BotState.SAVE_MAIN_CITY);
             replyText = "Привіт, " + username + "! Ласкаво прошу, я бот погоди.\n" +
                     "Введіть назву свого міста";
         }
 
-        user.setState(BotState.SAVE_MAIN_CITY);
+
         userRepository.save(user);
 
         return mainMenuKeyboardService.getMainMenuMessage(chatId, replyText);

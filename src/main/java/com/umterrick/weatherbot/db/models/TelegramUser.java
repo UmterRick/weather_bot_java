@@ -4,6 +4,7 @@ import com.umterrick.weatherbot.enums.BotState;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.ToString;
 
 import java.util.List;
 
@@ -11,6 +12,7 @@ import java.util.List;
 @Table(name = "users")
 @Data
 @RequiredArgsConstructor
+@ToString
 public class TelegramUser {
 
     @Column(name = "userid")
@@ -33,6 +35,7 @@ public class TelegramUser {
 
 
     @ManyToMany(cascade = {CascadeType.ALL})
+    @ToString.Exclude
     private List<City> cities;
 
     public TelegramUser(String username, long chatId) {

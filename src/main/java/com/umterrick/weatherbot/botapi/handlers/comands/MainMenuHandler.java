@@ -1,11 +1,13 @@
-package com.umterrick.weatherbot.botapi.handlers.comandHendlers;
+package com.umterrick.weatherbot.botapi.handlers.comands;
 
-import com.umterrick.weatherbot.botapi.handlers.InputMessageHandler;
 import com.umterrick.weatherbot.enums.BotState;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
-public class HandleSetCityCommand implements InputMessageHandler {
+/*
+ * This class is used to handle the main menu of the bot.
+ */
+public class MainMenuHandler implements InputMessageHandler {
 
     @Override
     public SendMessage handle(Message message) {
@@ -14,6 +16,6 @@ public class HandleSetCityCommand implements InputMessageHandler {
 
     @Override
     public BotState getHandlerName() {
-        return null;
+        return BotState.SHOW_MAIN_MENU;
     }
 }

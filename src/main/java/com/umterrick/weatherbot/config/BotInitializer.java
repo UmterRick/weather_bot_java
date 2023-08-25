@@ -1,6 +1,6 @@
 package com.umterrick.weatherbot.config;
 
-import com.umterrick.weatherbot.service.WeatherTelegramBot;
+import com.umterrick.weatherbot.WeatherTelegramBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.ContextRefreshedEvent;

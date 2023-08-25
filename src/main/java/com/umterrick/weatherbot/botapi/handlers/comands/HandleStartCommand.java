@@ -1,9 +1,9 @@
-package com.umterrick.weatherbot.botapi.handlers.comandHendlers;
+package com.umterrick.weatherbot.botapi.handlers.comands;
 
-import com.umterrick.weatherbot.botapi.handlers.InputMessageHandler;
 import com.umterrick.weatherbot.db.models.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.UserRepository;
 import com.umterrick.weatherbot.enums.BotState;
+import com.umterrick.weatherbot.service.MainMenuKeyboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -12,12 +12,17 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 @Component
 public class HandleStartCommand implements InputMessageHandler {
     private final UserRepository userRepository;
-
+    private final MainMenuKeyboardService mainMenuKeyboardService;
     @Autowired
-    public HandleStartCommand(UserRepository userRepository) {
+    public HandleStartCommand(UserRepository userRepository, MainMenuKeyboardService mainMenuKeyboardService) {
         this.userRepository = userRepository;
+        this.mainMenuKeyboardService = mainMenuKeyboardService;
     }
 
+    /*
+    * Handle the start command
+    * returns the main menu
+     */
     @Override
     public SendMessage handle(Message message) {
         long chatId = message.getChatId();
@@ -33,14 +38,15 @@ public class HandleStartCommand implements InputMessageHandler {
             user = new TelegramUser(username, chatId);
             userRepository.save(user);
             replyText = "Привіт, " + username + "! Ласкаво прошу, я бот погоди.\n" +
-                    "Напишіть своє основне місто, для якого ви хотіли б отримувати щоденний прогноз";
+                    "Введіть назву свого міста";
         }
 
-        user.setState(BotState.ASK_MAIN_CITY);
+        user.setState(BotState.SAVE_MAIN_CITY);
         userRepository.save(user);
 
-        return createSendMessage(chatId, replyText);
+        return mainMenuKeyboardService.getMainMenuMessage(chatId, replyText);
     }
+
 
     @Override
     public BotState getHandlerName() {

@@ -56,7 +56,6 @@ public class BotFacade {
         }
         BotState botState;
         SendMessage replyMessage;
-
         String commandInMessage = inputMessageText.substring(1).toUpperCase();
         BotCommands botCommand = BotCommands.valueOf(commandInMessage);
         botState = switch (botCommand) {

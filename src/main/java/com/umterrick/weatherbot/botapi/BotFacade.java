@@ -1,7 +1,6 @@
 package com.umterrick.weatherbot.botapi;
 
-import com.umterrick.weatherbot.botapi.BotStateContext;
-import com.umterrick.weatherbot.db.models.TelegramUser;
+import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.UserRepository;
 import com.umterrick.weatherbot.enums.BotCommands;
 import com.umterrick.weatherbot.enums.BotState;
@@ -9,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 

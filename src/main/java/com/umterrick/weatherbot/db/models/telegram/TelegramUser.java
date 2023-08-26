@@ -1,4 +1,4 @@
-package com.umterrick.weatherbot.db.models;
+package com.umterrick.weatherbot.db.models.telegram;
 
 import com.umterrick.weatherbot.enums.BotState;
 import jakarta.persistence.*;

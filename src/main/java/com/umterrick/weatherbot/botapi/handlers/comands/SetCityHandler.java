@@ -1,6 +1,6 @@
 package com.umterrick.weatherbot.botapi.handlers.comands;
 
-import com.umterrick.weatherbot.db.models.TelegramUser;
+import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.UserRepository;
 import com.umterrick.weatherbot.enums.BotState;
 import org.springframework.stereotype.Component;
@@ -8,11 +8,11 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Component
-public class HandleSetCityCommand implements InputMessageHandler {
+public class SetCityHandler implements InputMessageHandler {
 
     private final UserRepository userRepository;
 
-    public HandleSetCityCommand(UserRepository userRepository) {
+    public SetCityHandler(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

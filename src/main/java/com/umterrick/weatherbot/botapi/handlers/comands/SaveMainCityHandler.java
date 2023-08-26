@@ -1,7 +1,7 @@
 package com.umterrick.weatherbot.botapi.handlers.comands;
 
-import com.umterrick.weatherbot.db.models.City;
-import com.umterrick.weatherbot.db.models.TelegramUser;
+import com.umterrick.weatherbot.db.models.telegram.City;
+import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.CityRepository;
 import com.umterrick.weatherbot.db.repositories.UserRepository;
 import com.umterrick.weatherbot.enums.BotState;
@@ -11,12 +11,12 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Component
-public class SaveMainCityCommand implements InputMessageHandler {
+public class SaveMainCityHandler implements InputMessageHandler {
     private final UserRepository userRepository;
     private final CityRepository cityRepository;
     private final MainMenuKeyboardService mainMenuKeyboardService;
 
-    public SaveMainCityCommand(UserRepository userRepository, CityRepository cityRepository, MainMenuKeyboardService mainMenuKeyboardService) {
+    public SaveMainCityHandler(UserRepository userRepository, CityRepository cityRepository, MainMenuKeyboardService mainMenuKeyboardService) {
         this.userRepository = userRepository;
         this.cityRepository = cityRepository;
         this.mainMenuKeyboardService = mainMenuKeyboardService;
@@ -38,11 +38,6 @@ public class SaveMainCityCommand implements InputMessageHandler {
             user.setState(BotState.SHOW_MAIN_MENU);
             userRepository.save(user);
         }
-
-            user.setState(BotState.SHOW_MAIN_MENU);
-
-            userRepository.save(user);
-
         return mainMenuKeyboardService.getMainMenuMessage(chatId, "Місто збережене. Скористайтесь кнопками головного меню.");
     }
 

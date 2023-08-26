@@ -3,6 +3,7 @@ package com.umterrick.weatherbot.db.models;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
@@ -11,7 +12,7 @@ import java.util.List;
 @Table(name = "cities")
 @Getter
 @Data
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
 public class City {
 
     @Id

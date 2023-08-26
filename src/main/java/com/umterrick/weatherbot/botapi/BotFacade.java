@@ -56,13 +56,17 @@ public class BotFacade {
         }
         BotState botState;
         SendMessage replyMessage;
-        String commandInMessage = inputMessageText.substring(1).toUpperCase();
-        BotCommands botCommand = BotCommands.valueOf(commandInMessage);
-        botState = switch (botCommand) {
-            case START -> BotState.START;
-            case HELP -> BotState.SHOW_HELP_MENU;
-            default -> user.getState();
-        };
+        if (inputMessageText.startsWith("/")) {
+            String commandInMessage = inputMessageText.substring(1).toUpperCase();
+            BotCommands botCommand = BotCommands.valueOf(commandInMessage);
+            botState = switch (botCommand) {
+                case START -> BotState.START;
+                case HELP -> BotState.SHOW_HELP_MENU;
+                default -> user.getState();
+            };
+        } else {
+            botState = user.getState();
+        }
         user.setState(botState);
         replyMessage = botStateContext.processInputMessage(botState, message);
         return replyMessage;

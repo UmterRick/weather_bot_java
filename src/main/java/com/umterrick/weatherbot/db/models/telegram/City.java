@@ -18,13 +18,16 @@ public class City {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    @Column
+    private Double latitude;
+    @Column
+    private Double longitude;
+    @Column
     private String country;
+    @Column
     private String name;
-    private String coordinates;
 
-    @ManyToMany(mappedBy = "cities", cascade = {CascadeType.ALL})
+    @ManyToMany(mappedBy = "cities", cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     private List<TelegramUser> users;
-
 
 }

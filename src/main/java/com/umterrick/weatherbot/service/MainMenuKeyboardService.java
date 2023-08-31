@@ -13,8 +13,7 @@ import java.util.List;
 public class MainMenuKeyboardService {
     public SendMessage getMainMenuMessage(final long chatId, final String textMessage) {
         final ReplyKeyboardMarkup replyKeyboardMarkup = getMainMenuKeyboard();
-        final SendMessage mainMenuMessage =
-                createMessageWithKeyboard(chatId, textMessage, replyKeyboardMarkup);
+        final SendMessage mainMenuMessage = createMessageWithKeyboard(chatId, textMessage, replyKeyboardMarkup);
 
         return mainMenuMessage;
     }
@@ -31,8 +30,8 @@ public class MainMenuKeyboardService {
         KeyboardRow row2 = new KeyboardRow();
         KeyboardRow row3 = new KeyboardRow();
 
-        row1.add(new KeyboardButton("Погода"));
-        row1.add(new KeyboardButton("Прогноз"));
+        row1.add(new KeyboardButton("Погода зараз"));
+        row1.add(new KeyboardButton("Прогноз погоди"));
         row2.add(new KeyboardButton("Змінити основне місто"));
         row2.add(new KeyboardButton("Список міст швидкого доступу"));
         row3.add(new KeyboardButton("Довідка"));

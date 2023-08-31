@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -54,36 +55,50 @@ public class BotFacade {
         }
         BotState botState;
         SendMessage replyMessage;
+        String commandInMessage = inputMessageText;
         if (inputMessageText.startsWith("/")) {
-            String commandInMessage = inputMessageText.substring(1).toUpperCase();
-            BotCommands botCommand = BotCommands.valueOf(commandInMessage);
-            botState = switch (botCommand) {
-                case START -> BotState.START;
-                case HELP -> BotState.SHOW_HELP_MENU;
-                default -> user.getState();
-            };
-        } else {
-            botState = user.getState();
+            commandInMessage = inputMessageText.substring(1).toUpperCase();
         }
+
+        switch (commandInMessage) {
+            case "START":
+                botState = BotState.START;
+                break;
+            case "HELP":
+                botState = BotState.HELP;
+                break;
+            case "Погода зараз":
+                botState = BotState.TAKE_WEATHER;
+                break;
+            case "Прогноз погоди":
+                botState = BotState.TAKE_FORECAST;
+                break;
+            case "Змінити основне місто":
+                botState = BotState.ASK_MAIN_CITY;
+                break;
+            case "Список міст швидкого доступу":
+                botState = BotState.SHOW_ADDITIONAL_CITIES;
+                break;
+            case "Довідка":
+                botState = BotState.HELP;
+                break;
+            default:
+                botState = user.getState();
+                break;
+        }
+
         user.setState(botState);
+        log.info("User {} state is {}", user.getUsername(), botState);
         replyMessage = botStateContext.processInputMessage(botState, message);
         return replyMessage;
     }
 
     //method to handle callback from main menu keyboard
-//    private BotApiMethod<?> handleCallbackQuery(CallbackQuery buttonQuery) {
-//        long chatId = buttonQuery.getMessage().getChatId();
-//        BotState userBotState = userRepository.findBotStateByChatId(chatId);
-//        return botStateContext.processCallbackQuery(userBotState, buttonQuery);
-//    }
-
-    //method to handle reply message from main menu keyboard
-//    private SendMessage handleReplyMessage(BotState botState, Message message) {
-//        SendMessage replyMessage = new SendMessage();
-//        replyMessage.setChatId(message.getChatId());
-//        replyMessage.setText(botStateContext.processReplyMessage(botState, message));
-//        return botStateContext.processReplyMessage(botState, message);
-//    }
+    private BotApiMethod<?> handleCallbackQuery(CallbackQuery buttonQuery) {
+        long chatId = buttonQuery.getMessage().getChatId();
+        BotState userBotState = userRepository.findBotStateByChatId(chatId);
+        return botStateContext.processCallbackQuery(userBotState, buttonQuery);
+    }
 
 }
 

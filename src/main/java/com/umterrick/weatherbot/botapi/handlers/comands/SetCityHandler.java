@@ -29,6 +29,6 @@ public class SetCityHandler implements InputMessageHandler {
 
     @Override
     public BotState getHandlerName() {
-        return BotState.CHANGE_MAIN_CITY;
+        return BotState.ASK_MAIN_CITY;
     }
 }

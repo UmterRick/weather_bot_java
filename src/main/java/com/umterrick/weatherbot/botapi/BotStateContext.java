@@ -4,6 +4,7 @@ import com.umterrick.weatherbot.botapi.handlers.comands.InputMessageHandler;
 import com.umterrick.weatherbot.enums.BotState;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.util.HashMap;
@@ -28,11 +29,12 @@ public class BotStateContext {
         InputMessageHandler currentMessageHandler = findMessageHandler(currentState);
         return currentMessageHandler.handle(message);
     }
+
     //handle callback query from inline keyboard
-//    public SendMessage processCallbackQuery(BotState currentState, CallbackQuery callbackQuery) {
-//        InputMessageHandler currentMessageHandler = findMessageHandler(currentState);
-//        return CallbackQueryHandler.handle();
-//    }
+    public SendMessage processCallbackQuery(BotState currentState, CallbackQuery callbackQuery) {
+        InputMessageHandler currentMessageHandler = findMessageHandler(currentState);
+        return CallbackQueryHandler.handle();
+    }
 
 
     private InputMessageHandler findMessageHandler(BotState currentState) {

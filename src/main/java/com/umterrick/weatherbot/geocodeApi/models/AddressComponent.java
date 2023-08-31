@@ -1,4 +1,4 @@
-package com.umterrick.weatherbot.weatherApi.geocode.models;
+package com.umterrick.weatherbot.geocodeApi.models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

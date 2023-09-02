@@ -2,13 +2,11 @@ package com.umterrick.weatherbot.botapi;
 
 import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.UserRepository;
-import com.umterrick.weatherbot.enums.BotCommands;
 import com.umterrick.weatherbot.enums.BotState;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -36,6 +34,7 @@ public class BotFacade {
 
         if (message != null && message.hasText()) {
             replyMessage = handleInputMessage(message);
+            replyMessage.enableMarkdown(true);
         }
 //        if (update.hasCallbackQuery()) {
 //            CallbackQuery callbackQuery = update.getCallbackQuery();
@@ -94,11 +93,11 @@ public class BotFacade {
     }
 
     //method to handle callback from main menu keyboard
-    private BotApiMethod<?> handleCallbackQuery(CallbackQuery buttonQuery) {
-        long chatId = buttonQuery.getMessage().getChatId();
-        BotState userBotState = userRepository.findBotStateByChatId(chatId);
-        return botStateContext.processCallbackQuery(userBotState, buttonQuery);
-    }
+//    private BotApiMethod<?> handleCallbackQuery(CallbackQuery buttonQuery) {
+//        long chatId = buttonQuery.getMessage().getChatId();
+//        BotState userBotState = userRepository.findBotStateByChatId(chatId);
+//        return botStateContext.processCallbackQuery(userBotState, buttonQuery);
+//    }
 
 }
 

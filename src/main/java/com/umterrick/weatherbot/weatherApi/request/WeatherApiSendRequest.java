@@ -1,24 +1,27 @@
 package com.umterrick.weatherbot.weatherApi.request;
 
 import com.umterrick.weatherbot.db.models.telegram.City;
-import com.umterrick.weatherbot.weatherApi.models.WeatherInfo;
+import com.umterrick.weatherbot.weatherApi.models.WeatherData;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Locale;
+
 @Component
+@Slf4j
 public class WeatherApiSendRequest {
-    @Value("${weather.api.key}")
+    @Value("${weather_api.key}")
     private String apiKey;
-    @Value("${weather.api.url}")
+    @Value("${weather_api.url}")
     private String url;
 
-    public WeatherInfo getWeather(City city, int days) throws Exception {
+    public WeatherData getWeather(City city, int days) {
         RestTemplate restTemplate = new RestTemplate();
-        double lat = city.getLatitude();
-        double lon = city.getLongitude();
+        String lat =  String.format(Locale.US, "%.2f", city.getLatitude());
+        String lon =  String.format(Locale.US, "%.2f", city.getLongitude());
         String uri = String.format(url, apiKey, lat, lon, days);
-        WeatherInfo weatherInfo = restTemplate.getForObject(uri, WeatherInfo.class);
-        return weatherInfo;
+        return restTemplate.getForObject(uri, WeatherData.class);
     }
 }

@@ -6,10 +6,10 @@ import lombok.Data;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
-public class WeatherInfo {
-    @JsonProperty("current")
-    private CurrentWeather currentWeather;
+public class Astro {
+    private String sunrise;
+    private String sunset;
 
-    @JsonProperty("forecast")
-    private Forecast forecast;
+    @JsonProperty("moon_phase")
+    private String moonPhase;
 }

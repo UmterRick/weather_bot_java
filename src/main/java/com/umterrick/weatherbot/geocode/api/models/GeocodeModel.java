@@ -1,4 +1,4 @@
-package com.umterrick.weatherbot.geocodeApi.models;
+package com.umterrick.weatherbot.geocode.api.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

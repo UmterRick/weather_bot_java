@@ -5,9 +5,8 @@ import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.CityRepository;
 import com.umterrick.weatherbot.db.repositories.UserRepository;
 import com.umterrick.weatherbot.enums.BotState;
-import com.umterrick.weatherbot.geocodeApi.models.Location;
-import com.umterrick.weatherbot.geocodeApi.models.Result;
-import com.umterrick.weatherbot.geocodeApi.request.GeocodeSendRequest;
+import com.umterrick.weatherbot.geocode.api.models.Location;
+import com.umterrick.weatherbot.geocode.api.request.GeocodeSendRequest;
 import com.umterrick.weatherbot.service.MainMenuKeyboardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -28,7 +27,8 @@ public class SaveMainCityHandler implements InputMessageHandler {
         this.mainMenuKeyboardService = mainMenuKeyboardService;
         this.geocodeSendRequest = geocodeSendRequest;
     }
-// search and validate city
+
+    // search and validate city
     @Override
     public SendMessage handle(Message message) {
         long chatId = message.getChatId();
@@ -40,10 +40,18 @@ public class SaveMainCityHandler implements InputMessageHandler {
 //Result GeocodingApi
         try {
             Location requestResult = geocodeSendRequest.getCoordinates(messageText);
-            city.setName(messageText);
-            city.setLatitude(Double.parseDouble(requestResult.getLat()));
-            city.setLongitude(Double.parseDouble(requestResult.getLng()));
-            cityRepository.save(city);
+            City existingCity = cityRepository.findByName(messageText);
+            if (existingCity != null) {
+                city = existingCity;
+                log.info("City {} already exists", city.getName());
+            } else {
+                city.setName(messageText);
+                city.setLatitude(Double.parseDouble(requestResult.getLat()));
+                city.setLongitude(Double.parseDouble(requestResult.getLng()));
+                cityRepository.save(city);
+                log.info("City {} saved", city.getName());
+            }
+
             user.setMainCity(city);
             user.setState(BotState.SHOW_MAIN_MENU);
             userRepository.save(user);

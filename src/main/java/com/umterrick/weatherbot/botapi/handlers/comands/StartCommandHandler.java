@@ -30,7 +30,7 @@ public class StartCommandHandler implements InputMessageHandler {
         long userId = message.getFrom().getId();
 
         TelegramUser user = userRepository.findByChatId(userId);
-        SendMessage reply = null;
+        SendMessage reply = new SendMessage();
         String replyText;
         if (user.getMainCity() != null) {
             replyText = "З поверненням, " + user.getUsername() + "!";

@@ -7,7 +7,6 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 @Data
 public class DayForecast {
-    private String date;
 
     @JsonProperty("maxtemp_c")
     private double maxTempC;

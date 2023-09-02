@@ -1,9 +1,9 @@
-package com.umterrick.weatherbot.geocodeApi.request;
+package com.umterrick.weatherbot.geocode.api.request;
 
-import com.umterrick.weatherbot.geocodeApi.models.GeocodeResponse;
-import com.umterrick.weatherbot.geocodeApi.models.Geometry;
-import com.umterrick.weatherbot.geocodeApi.models.Location;
-import com.umterrick.weatherbot.geocodeApi.models.Result;
+import com.umterrick.weatherbot.geocode.api.models.GeocodeResponse;
+import com.umterrick.weatherbot.geocode.api.models.Geometry;
+import com.umterrick.weatherbot.geocode.api.models.Location;
+import com.umterrick.weatherbot.geocode.api.models.Result;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -11,9 +11,9 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class GeocodeSendRequest {
 
-    @Value("${google.geocoding.api.key}")
+    @Value("${google_geocoding_api.key}")
     private String apiKey;
-    @Value("${google.geocoding.api.url}")
+    @Value("${google_geocoding_api.url}")
     private String url;
 
 

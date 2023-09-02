@@ -16,8 +16,8 @@ public class CurrentWeather {
     @JsonProperty("condition")
     private Condition condition;
 
-    @JsonProperty("wind_mph")
-    private double windMph;
+    @JsonProperty("wind_kph")
+    private double windKph;
 
     @JsonProperty("pressure_mb")
     private double pressureMb;

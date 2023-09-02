@@ -1,13 +1,15 @@
-package com.umterrick.weatherbot.service;
+package com.umterrick.weatherbot.service.keyboard.inline;
 
+import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ForecastInlineKeyboardService {
-    public InlineKeyboardMarkup getForecastInlineKeyboard() {
+public class ForecastInlineKeyboardService implements TelegramInlineKeyboard{
+    public InlineKeyboardMarkup getKeyboard(TelegramUser user) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
 
         InlineKeyboardButton tomorrowButton = new InlineKeyboardButton();
@@ -36,5 +38,10 @@ public class ForecastInlineKeyboardService {
 
         inlineKeyboardMarkup.setKeyboard(rowList);
         return inlineKeyboardMarkup;
+    }
+
+    @Override
+    public SendMessage createMessageWithKeyboard(TelegramUser user, String messageText) {
+        return null;
     }
 }

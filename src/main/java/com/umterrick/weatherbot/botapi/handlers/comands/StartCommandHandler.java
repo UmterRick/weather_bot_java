@@ -3,7 +3,7 @@ package com.umterrick.weatherbot.botapi.handlers.comands;
 import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.UserRepository;
 import com.umterrick.weatherbot.enums.BotState;
-import com.umterrick.weatherbot.service.MainMenuKeyboardService;
+import com.umterrick.weatherbot.service.keyboard.reply.MainMenuKeyboardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

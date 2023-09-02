@@ -7,7 +7,7 @@ import com.umterrick.weatherbot.db.repositories.UserRepository;
 import com.umterrick.weatherbot.enums.BotState;
 import com.umterrick.weatherbot.geocode.api.models.Location;
 import com.umterrick.weatherbot.geocode.api.request.GeocodeSendRequest;
-import com.umterrick.weatherbot.service.MainMenuKeyboardService;
+import com.umterrick.weatherbot.service.keyboard.reply.MainMenuKeyboardService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

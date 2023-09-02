@@ -1,9 +1,11 @@
 package com.umterrick.weatherbot.botapi;
 
 import com.umterrick.weatherbot.botapi.handlers.comands.InputMessageHandler;
+import com.umterrick.weatherbot.botapi.handlers.keyboard.WeatherCallbackQueryHandler;
 import com.umterrick.weatherbot.enums.BotState;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
 import java.util.HashMap;
@@ -29,11 +31,6 @@ public class BotStateContext {
         return currentMessageHandler.handle(message);
     }
 
-    //handle callback query from inline keyboard
-//    public SendMessage processCallbackQuery(BotState currentState, CallbackQuery callbackQuery) {
-//        InputMessageHandler currentMessageHandler = findMessageHandler(currentState);
-//        return currentMessageHandler.handle(callbackQuery);
-//    }
 
     private InputMessageHandler findMessageHandler(BotState currentState) {
         if (BotState.START == currentState) {
@@ -41,6 +38,9 @@ public class BotStateContext {
         }
         if (BotState.HELP == currentState) {
             return messageHandlers.get(BotState.HELP);
+        }
+        if (BotState.SHOW_ADDITIONAL_CITIES == currentState) {
+            return messageHandlers.get(BotState.SHOW_ADDITIONAL_CITIES);
         }
         return messageHandlers.get(currentState);
     }

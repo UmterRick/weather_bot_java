@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.ToString;
-
+//import jakarta.persistence.FetchType;
 import java.util.List;
 
 @Entity
@@ -34,7 +34,7 @@ public class TelegramUser {
     private BotState state;
 
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.ALL}, fetch = FetchType.EAGER)
     @ToString.Exclude
     private List<City> cities;
 

@@ -1,4 +1,4 @@
-package com.umterrick.weatherbot.service;
+package com.umterrick.weatherbot.service.keyboard.reply;
 
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

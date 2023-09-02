@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
@@ -36,10 +37,10 @@ public class BotFacade {
             replyMessage = handleInputMessage(message);
             replyMessage.enableMarkdown(true);
         }
-//        if (update.hasCallbackQuery()) {
-//            CallbackQuery callbackQuery = update.getCallbackQuery();
-//            return handleCallbackQuery(callbackQuery);
-//        }
+        if (update.hasCallbackQuery()) {
+            CallbackQuery callbackQuery = update.getCallbackQuery();
+            return handleCallbackQuery(callbackQuery);
+        }
         return replyMessage;
     }
 
@@ -93,11 +94,11 @@ public class BotFacade {
     }
 
     //method to handle callback from main menu keyboard
-//    private BotApiMethod<?> handleCallbackQuery(CallbackQuery buttonQuery) {
-//        long chatId = buttonQuery.getMessage().getChatId();
-//        BotState userBotState = userRepository.findBotStateByChatId(chatId);
-//        return botStateContext.processCallbackQuery(userBotState, buttonQuery);
-//    }
+    private BotApiMethod<?> handleCallbackQuery(CallbackQuery buttonQuery) {
+        long chatId = buttonQuery.getMessage().getChatId();
+        BotState userBotState = userRepository.findBotStateByChatId(chatId);
+        return botStateContext.processCallbackQuery(userBotState, buttonQuery);
+    }
 
 }
 

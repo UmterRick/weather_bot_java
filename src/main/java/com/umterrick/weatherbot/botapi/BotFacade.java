@@ -2,6 +2,7 @@ package com.umterrick.weatherbot.botapi;
 
 import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.UserRepository;
+import com.umterrick.weatherbot.enums.BotCallbackPrefix;
 import com.umterrick.weatherbot.enums.BotState;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
@@ -20,12 +21,15 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 @Slf4j
 public class BotFacade {
     private BotStateContext botStateContext;
+    private BotCallbackQueryContext botCallbackQueryContext;
     private final UserRepository userRepository;
 
 
     public BotFacade(BotStateContext botStateContext,
+                     BotCallbackQueryContext botCallbackQueryContext,
                      UserRepository userRepository) {
         this.botStateContext = botStateContext;
+        this.botCallbackQueryContext = botCallbackQueryContext;
         this.userRepository = userRepository;
     }
 
@@ -96,8 +100,22 @@ public class BotFacade {
     //method to handle callback from main menu keyboard
     private BotApiMethod<?> handleCallbackQuery(CallbackQuery buttonQuery) {
         long chatId = buttonQuery.getMessage().getChatId();
-        BotState userBotState = userRepository.findBotStateByChatId(chatId);
-        return botStateContext.processCallbackQuery(userBotState, buttonQuery);
+        String[] parsedCallbackData = buttonQuery.getData().split("-");
+        String prefixInCallback = parsedCallbackData[0];
+
+        BotCallbackPrefix prefix;
+        switch (prefixInCallback) {
+            case "CITY":
+                prefix = BotCallbackPrefix.CITY;
+                break;
+            case "WEATHER":
+                prefix = BotCallbackPrefix.WEATHER;
+                break;
+            default:
+                prefix = null;
+        }
+
+        return botCallbackQueryContext.processCallbackQuery(prefix, buttonQuery);
     }
 
 }

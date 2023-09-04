@@ -2,6 +2,7 @@ package com.umterrick.weatherbot.botapi;
 
 import com.umterrick.weatherbot.botapi.handlers.keyboard.CallbackQueryHandler;
 import com.umterrick.weatherbot.enums.BotCallbackPrefix;
+import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
@@ -9,6 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Component
 public class BotCallbackQueryContext {
 
     private Map<BotCallbackPrefix, CallbackQueryHandler> callbackQueryHandlers = new HashMap<>();

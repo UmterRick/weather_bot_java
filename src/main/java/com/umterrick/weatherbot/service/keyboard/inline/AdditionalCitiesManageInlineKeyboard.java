@@ -62,11 +62,11 @@ public class AdditionalCitiesManageInlineKeyboard implements TelegramInlineKeybo
 
         InlineKeyboardButton forecastCityButton = new InlineKeyboardButton();
         forecastCityButton.setText("Forecast");
-        cityButton.setCallbackData(BotCallbackPrefix.CITY + "-forecast-" + city.getId());
+        forecastCityButton.setCallbackData(BotCallbackPrefix.CITY + "-forecast-" + city.getId());
 
         InlineKeyboardButton deleteCityButton = new InlineKeyboardButton();
         deleteCityButton.setText("Delete");
-        cityButton.setCallbackData(BotCallbackPrefix.CITY + "-delete-" + city.getId());
+        deleteCityButton.setCallbackData(BotCallbackPrefix.CITY + "-delete-" + city.getId());
 
         List<InlineKeyboardButton> keyboardButtonsRow = new ArrayList<>();
         keyboardButtonsRow.add(cityButton);

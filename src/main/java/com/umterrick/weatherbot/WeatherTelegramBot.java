@@ -28,6 +28,7 @@ public class WeatherTelegramBot extends TelegramLongPollingBot {
 
     @Override
     public void onUpdateReceived(Update update) {
+        
         BotApiMethod<?> replyMessage = botFacade.handleUpdate(update);
         try {
             execute(replyMessage);

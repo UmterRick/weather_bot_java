@@ -3,6 +3,7 @@ package com.umterrick.weatherbot.botapi;
 import com.umterrick.weatherbot.botapi.handlers.keyboard.CallbackQueryHandler;
 import com.umterrick.weatherbot.enums.BotCallbackPrefix;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
@@ -19,7 +20,7 @@ public class BotCallbackQueryContext {
         callbackQueryHandlers.forEach(handler -> this.callbackQueryHandlers.put(handler.getHandlerName(), handler));
     }
 
-    public SendMessage processCallbackQuery(BotCallbackPrefix callbackPrefix, CallbackQuery  callbackQuery) {
+    public BotApiMethod<?> processCallbackQuery(BotCallbackPrefix callbackPrefix, CallbackQuery  callbackQuery) {
         CallbackQueryHandler currentCallbackQueryHandler = findCallbackQueryHandler(callbackPrefix);
         return currentCallbackQueryHandler.handle(callbackQuery);
     }

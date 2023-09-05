@@ -1,6 +1,5 @@
 package com.umterrick.weatherbot.botapi.handlers.comands.weather.handlers;
 
-import com.umterrick.weatherbot.botapi.handlers.comands.InputMessageHandler;
 import com.umterrick.weatherbot.db.models.telegram.City;
 import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.UserRepository;
@@ -15,7 +14,7 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Component
 @Slf4j
-public class RealtimeHandler implements InputMessageHandler {
+public class RealtimeHandler {
 
     private final RealtimeMessageFormatter realtimeMessageFormatter;
     private final UserRepository userRepository;
@@ -28,8 +27,9 @@ public class RealtimeHandler implements InputMessageHandler {
         this.weatherApiSendRequest = weatherApiSendRequest;
     }
 
-    @Override
+
     public SendMessage handle(Message message) {
+
         TelegramUser user = userRepository.findByChatId(message.getChatId());
         City city = user.getMainCity();
         if (city != null) {
@@ -42,7 +42,6 @@ public class RealtimeHandler implements InputMessageHandler {
 
     }
 
-    @Override
     public BotState getHandlerName() {
         return BotState.TAKE_WEATHER;
     }

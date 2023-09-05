@@ -1,9 +1,12 @@
 package com.umterrick.weatherbot.botapi.handlers.keyboard;
 
+import com.umterrick.weatherbot.db.repositories.CityRepository;
 import com.umterrick.weatherbot.enums.BotCallbackPrefix;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
 import java.util.Objects;
@@ -11,6 +14,7 @@ import java.util.Objects;
 @Slf4j
 @Component
 public class CityCallbackQueryHandler implements CallbackQueryHandler {
+    private CityRepository cityRepository;
 
 
     @Override
@@ -38,7 +42,7 @@ public class CityCallbackQueryHandler implements CallbackQueryHandler {
             System.out.println("Delete");
 
         } else if (callbackAction.equals("add")) {
-            ...
+            System.out.println("Add");
         }
 
 

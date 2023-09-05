@@ -1,4 +1,4 @@
-package com.umterrick.weatherbot.botapi.handlers.comands;
+package com.umterrick.weatherbot.botapi.handlers.comands.message.handlers;
 
 import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.db.repositories.UserRepository;

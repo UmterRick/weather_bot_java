@@ -1,6 +1,7 @@
 package com.umterrick.weatherbot.service.keyboard.inline;
 
 import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
+import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
@@ -8,6 +9,7 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class ForecastInlineKeyboardService implements TelegramInlineKeyboard{
     public InlineKeyboardMarkup getKeyboard(TelegramUser user) {
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
@@ -20,9 +22,9 @@ public class ForecastInlineKeyboardService implements TelegramInlineKeyboard{
         threeDaysButton.setText("Прогноз на 3 дні");
         fiveDaysButton.setText("Прогноз на 5 днів");
 
-        tomorrowButton.setCallbackData("1");
-        threeDaysButton.setCallbackData("3");
-        fiveDaysButton.setCallbackData("5");
+        tomorrowButton.setCallbackData("weather-1");
+        threeDaysButton.setCallbackData("weather-3");
+        fiveDaysButton.setCallbackData("weather-5");
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
         keyboardButtonsRow1.add(tomorrowButton);

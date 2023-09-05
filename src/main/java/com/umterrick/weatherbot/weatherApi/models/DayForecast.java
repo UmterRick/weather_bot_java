@@ -14,8 +14,8 @@ public class DayForecast {
     @JsonProperty("mintemp_c")
     private double minTempC;
 
-    @JsonProperty("maxwind_mph")
-    private double maxWindMph;
+    @JsonProperty("maxwind_kph")
+    private double maxWindKph;
 
     @JsonProperty("totalprecip_mm")
     private double totalPrecipMm;

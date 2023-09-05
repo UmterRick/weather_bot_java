@@ -57,7 +57,7 @@ public class AdditionalCitiesManageInlineKeyboard implements TelegramInlineKeybo
     @NotNull
     private static List<InlineKeyboardButton> getCityButtons(City city) {
         InlineKeyboardButton cityButton = new InlineKeyboardButton();
-        cityButton.setText(city.getName());
+        cityButton.setText(city.getName() + " Погода зараз");
         cityButton.setCallbackData(BotCallbackPrefix.CITY + "-weather-" + city.getId());
 
         InlineKeyboardButton forecastCityButton = new InlineKeyboardButton();

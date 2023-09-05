@@ -72,10 +72,10 @@ public class BotFacade {
                 botState = BotState.HELP;
                 break;
             case "Погода зараз":
-                botState = BotState.TAKE_WEATHER;
+                botState = BotState.SHOW_WEATHER;
                 break;
             case "Прогноз погоди":
-                botState = BotState.TAKE_FORECAST;
+                botState = BotState.SHOW_WEATHER;
                 break;
             case "Змінити основне місто":
                 botState = BotState.ASK_MAIN_CITY;
@@ -108,7 +108,7 @@ public class BotFacade {
             case "CITY":
                 prefix = BotCallbackPrefix.CITY;
                 break;
-            case "WEATHER":
+            case "weather":
                 prefix = BotCallbackPrefix.WEATHER;
                 break;
             default:

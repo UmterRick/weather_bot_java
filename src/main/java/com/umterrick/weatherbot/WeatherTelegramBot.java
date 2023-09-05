@@ -1,12 +1,16 @@
 package com.umterrick.weatherbot;
 
 import com.umterrick.weatherbot.botapi.BotFacade;
+import com.umterrick.weatherbot.cache.DeleteMessageCache;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.BotApiMethod;
+import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+
+import java.util.Map;
 
 
 @Component
@@ -15,10 +19,12 @@ public class WeatherTelegramBot extends TelegramLongPollingBot {
     private final BotFacade botFacade;
     @Value("${bot.Name")
     String botName;
+    private final DeleteMessageCache deleteMessageCache;
 
-    public WeatherTelegramBot(@Value("${bot.token}") String botToken, BotFacade botFacade) {
+    public WeatherTelegramBot(@Value("${bot.token}") String botToken, BotFacade botFacade, DeleteMessageCache deleteMessageCache) {
         super(botToken);
         this.botFacade = botFacade;
+        this.deleteMessageCache = deleteMessageCache;
     }
 
     @Override
@@ -32,26 +38,19 @@ public class WeatherTelegramBot extends TelegramLongPollingBot {
         BotApiMethod<?> replyMessage = botFacade.handleUpdate(update);
         try {
             execute(replyMessage);
+
+            Map<Long, Integer> messagesToDelete = deleteMessageCache.getMessagesToDelete();
+            if (!messagesToDelete.isEmpty()) {
+                for (Map.Entry<Long, Integer> entry : messagesToDelete.entrySet()) {
+                    DeleteMessage deleteMessage = new DeleteMessage(entry.getKey().toString(), entry.getValue());
+                    execute(deleteMessage);
+                }
+                deleteMessageCache.clearMessagesToDelete();
+            }
         } catch (TelegramApiException e) {
             throw new RuntimeException(e);
         }
     }
 
-//    private void startCommandResponse(long chatId, String userName) {
-//        String responseText = "Hello Dear, " + userName;
-//        sendMessage(chatId, responseText);
-//    }
-//    private void sendMessage(long chatId, String text) {
-//        SendMessage message = new SendMessage();
-//        message.setChatId(String.valueOf(chatId));
-//        message.setText(text);
-//        botFacade.handleUpdate(message);
-//        try {
-//            execute(message);
-//
-//        } catch (TelegramApiException e) {
-//            System.out.println(e.getMessage());
-//        }
-//
-//    }
+
 }

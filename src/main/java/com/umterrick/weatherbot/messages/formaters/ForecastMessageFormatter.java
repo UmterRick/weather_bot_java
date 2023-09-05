@@ -30,7 +30,7 @@ public class ForecastMessageFormatter {
                     .append(forecastDay.getMinTempC()).append("°C/")
                     .append(forecastDay.getMaxTempC()).append("°C\n");
             message.append("Кількість опадів протягом дня: ").append(forecastDay.getTotalPrecipMm()).append("мм").append("\n");
-            message.append("Макс. швидкість вітру: ").append(forecastDay.getMaxWindKph()).append(" м/c\n");
+            message.append("Макс. швидкість вітру: ").append(forecastDay.getMaxWindKph()).append(" км/год\n");
             message.append("UV: ").append(forecastDay.getUv()).append("\n");
             message.append("\n");
         }

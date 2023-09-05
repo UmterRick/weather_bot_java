@@ -31,11 +31,16 @@ public class RealtimeHandler {
     public SendMessage handle(Message message) {
 
         TelegramUser user = userRepository.findByChatId(message.getChatId());
+
         City city = user.getMainCity();
         if (city != null) {
             WeatherData cityWeather = weatherApiSendRequest.getWeather(city, 0);
             String messageText = realtimeMessageFormatter.format(cityWeather);
-            return new SendMessage(message.getChatId().toString(), messageText);
+            return new SendMessage().builder()
+                    .text(messageText)
+                    .chatId(message.getChatId())
+                    .parseMode("Markdown")
+                    .build();
         }
 
         return new SendMessage(message.getChatId().toString(), "Спершу задайте місто");

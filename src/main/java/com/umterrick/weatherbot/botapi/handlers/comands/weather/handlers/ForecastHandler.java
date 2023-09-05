@@ -37,6 +37,7 @@ public class ForecastHandler {
             InlineKeyboardMarkup keyboardMarkup = forecastInlineKeyboardService.getKeyboard(user);
             SendMessage sendMessage = new SendMessage(message.getChatId().toString(), messageText);
             sendMessage.setReplyMarkup(keyboardMarkup);
+            sendMessage.enableMarkdown(true);
             return sendMessage;
         }
         return null;

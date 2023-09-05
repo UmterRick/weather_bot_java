@@ -4,6 +4,7 @@ import com.umterrick.weatherbot.botapi.handlers.comands.weather.handlers.Forecas
 import com.umterrick.weatherbot.db.models.telegram.TelegramUser;
 import com.umterrick.weatherbot.enums.BotCallbackPrefix;
 import com.umterrick.weatherbot.service.keyboard.inline.ForecastInlineKeyboardService;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
@@ -28,30 +29,26 @@ public class WeatherCallbackQueryHandler implements CallbackQueryHandler{
         Message messageToUpdate = callbackQuery.getMessage();
 
         if (1 == callbackDays) {
-            EditMessageText editMessageText = new EditMessageText();
-            editMessageText.setChatId(messageToUpdate.getChatId().toString());
-            editMessageText.setMessageId(messageToUpdate.getMessageId());
-            editMessageText.setText(forecastHandler.handle(messageToUpdate, callbackDays).getText());
-            editMessageText.setReplyMarkup(forecastInlineKeyboardService.getKeyboard(user));
-            return editMessageText;
+            return getEditMessageText(callbackDays, user, messageToUpdate);
 
         } else if (3 == callbackDays) {
-            EditMessageText editMessageText = new EditMessageText();
-            editMessageText.setChatId(messageToUpdate.getChatId().toString());
-            editMessageText.setMessageId(messageToUpdate.getMessageId());
-            editMessageText.setText(forecastHandler.handle(messageToUpdate, callbackDays).getText());
-            editMessageText.setReplyMarkup(forecastInlineKeyboardService.getKeyboard(user));
-            return editMessageText;
+            return getEditMessageText(callbackDays, user, messageToUpdate);
 
         } else if (5 == callbackDays) {
-            EditMessageText editMessageText = new EditMessageText();
-            editMessageText.setChatId(messageToUpdate.getChatId().toString());
-            editMessageText.setMessageId(messageToUpdate.getMessageId());
-            editMessageText.setText(forecastHandler.handle(messageToUpdate, callbackDays).getText());
-            editMessageText.setReplyMarkup(forecastInlineKeyboardService.getKeyboard(user));
-            return editMessageText;
+            return getEditMessageText(callbackDays, user, messageToUpdate);
         }
         return null;
+    }
+
+    @NotNull
+    private EditMessageText getEditMessageText(int callbackDays, TelegramUser user, Message messageToUpdate) {
+        EditMessageText editMessageText = new EditMessageText();
+        editMessageText.setChatId(messageToUpdate.getChatId().toString());
+        editMessageText.setMessageId(messageToUpdate.getMessageId());
+        editMessageText.setText(forecastHandler.handle(messageToUpdate, callbackDays).getText());
+        editMessageText.setReplyMarkup(forecastInlineKeyboardService.getKeyboard(user));
+        editMessageText.enableMarkdown(true);
+        return editMessageText;
     }
 
     @Override

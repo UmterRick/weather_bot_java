@@ -27,15 +27,16 @@ public class AdditionalCitiesManageInlineKeyboard implements TelegramInlineKeybo
             buttonRows.add(keyboardButtonsRow);
 
         }
-        List<InlineKeyboardButton> addCityButtonRow = new ArrayList<>();
 
-        InlineKeyboardButton addCityButton = new InlineKeyboardButton();
-        addCityButton.setText("Додати місто");
-        addCityButton.setCallbackData("add_city");
+        if (user.getCities().size() < 5) {
+            List<InlineKeyboardButton> addCityButtonRow = new ArrayList<>();
+            InlineKeyboardButton addCityButton = new InlineKeyboardButton();
+            addCityButton.setText("Додати місто");
+            addCityButton.setCallbackData(BotCallbackPrefix.CITY + "-add");
 
-        addCityButtonRow.add(addCityButton);
-        buttonRows.add(addCityButtonRow);
-
+            addCityButtonRow.add(addCityButton);
+            buttonRows.add(addCityButtonRow);
+        }
         inlineKeyboardMarkup.setKeyboard(buttonRows);
         return inlineKeyboardMarkup;
     }

@@ -69,9 +69,8 @@ public class CityCallbackQueryHandler implements CallbackQueryHandler {
             return editMessageText(callbackQuery, messageText);
 
         } else if (callbackAction.equals("delete")) {
-            user.getCities().remove(city);
+            user.removeCity(city);
             userRepository.save(user);
-//            deleteMessageCache.addMessageToDelete(callbackQuery.getMessage().getChatId(),  callbackQuery.getMessage().getMessageId());
             return editMessageText(callbackQuery, "Місто видалено. Скористайтесь кнопками.");
         } else if (callbackAction.equals("add")) {
             deleteMessageCache.addMessageToDelete(callbackQuery.getMessage().getChatId(),  callbackQuery.getMessage().getMessageId());

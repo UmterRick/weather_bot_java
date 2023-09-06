@@ -50,6 +50,7 @@ public class TelegramUser {
 
     public void removeCity(City city) {
         cities.remove(city);
+        city.getUsers().remove(this);
     }
 
 

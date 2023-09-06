@@ -1,5 +1,6 @@
 package com.umterrick.weatherbot.messages.formaters;
 
+import com.umterrick.weatherbot.openai.api.ChatGptRequest;
 import com.umterrick.weatherbot.weatherApi.models.DayForecast;
 import com.umterrick.weatherbot.weatherApi.models.WeatherData;
 import org.springframework.stereotype.Component;
@@ -7,6 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 
 public class ForecastMessageFormatter {
+    private final ChatGptRequest  chatGptRequest;
+
+    public ForecastMessageFormatter(ChatGptRequest chatGptRequest) {
+        this.chatGptRequest = chatGptRequest;
+    }
 
 //            """
 //            **%s**
@@ -33,6 +39,8 @@ public class ForecastMessageFormatter {
             message.append("Макс. швидкість вітру: ").append(forecastDay.getMaxWindKph()).append(" км/год\n");
             message.append("UV: ").append(forecastDay.getUv()).append("\n");
             message.append("\n");
+            message.append("Рекомендація від штучного інтелекту:");
+            message.append(chatGptRequest.chatGptGetForecastRec(message.toString()));
         }
 
         return message.toString();

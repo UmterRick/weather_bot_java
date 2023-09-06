@@ -52,7 +52,7 @@ public class ChatGptRequest {
 
         final List<ChatMessage> messages = new ArrayList<>();
         final ChatMessage systemMessage = new ChatMessage(ChatMessageRole.SYSTEM.value(),
-                "Надай коротку рекомендацію по прогнозу погоди: " + inputWeather);
+                "Надай коротку рекомендацію по прогнозу погоди(1 речення): " + inputWeather);
 
         messages.add(systemMessage);
 

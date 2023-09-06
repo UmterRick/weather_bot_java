@@ -20,6 +20,9 @@ import org.telegram.telegrambots.meta.api.methods.updatingmessages.DeleteMessage
 import org.telegram.telegrambots.meta.api.methods.updatingmessages.EditMessageText;
 import org.telegram.telegrambots.meta.api.objects.CallbackQuery;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Slf4j
 @Component
 public class CityCallbackQueryHandler implements CallbackQueryHandler {
@@ -68,9 +71,19 @@ public class CityCallbackQueryHandler implements CallbackQueryHandler {
             String messageText = forecastMessageFormatter.format(cityWeather, 3);
             return editMessageText(callbackQuery, messageText);
 
-        } else if (callbackAction.equals("delete")) {
-            user.removeCity(city);
+        } else if (callbackAction.equals("delete") && city != null) {
+            user.removeCityByName(city.getName());
+            log.info("City {} deleted", city.getName());
+            log.info("User {} cities: {}", user.getChatId(), user.getCities());
             userRepository.save(user);
+            cityRepository.save(city);
+//            List<City> cities = new ArrayList<>(user.getCities());
+//            cities.remove(city);
+//            user.setCities(cities);
+//            assert city != null;
+//            city.getUsers().remove(user);
+//            userRepository.save(user);
+//            cityRepository.save(city);
             return editMessageText(callbackQuery, "Місто видалено. Скористайтесь кнопками.");
         } else if (callbackAction.equals("add")) {
             deleteMessageCache.addMessageToDelete(callbackQuery.getMessage().getChatId(),  callbackQuery.getMessage().getMessageId());

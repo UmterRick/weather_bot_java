@@ -13,6 +13,7 @@ import java.util.List;
 @Data
 @RequiredArgsConstructor
 @ToString
+
 public class TelegramUser {
 
     @Column(name = "userid")
@@ -48,10 +49,18 @@ public class TelegramUser {
         cities.add(city);
     }
 
-    public void removeCity(City city) {
-        cities.remove(city);
-        city.getUsers().remove(this);
+    public void removeCityByName(String cityName) {
+        City cityToRemove = null;
+        for (City city : cities) {
+            if (city.getName().equals(cityName)) {
+                cityToRemove = city;
+                break;
+            }
+        }
+
+        if (cityToRemove != null) {
+            cities.remove(cityToRemove);
+            cityToRemove.getUsers().remove(this);
+        }
     }
-
-
 }

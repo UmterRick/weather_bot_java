@@ -22,9 +22,9 @@ public class ForecastInlineKeyboardService implements TelegramInlineKeyboard{
         threeDaysButton.setText("Прогноз на 3 дні");
         fiveDaysButton.setText("Прогноз на 5 днів");
 
-        tomorrowButton.setCallbackData("weather-1");
-        threeDaysButton.setCallbackData("weather-3");
-        fiveDaysButton.setCallbackData("weather-5");
+        tomorrowButton.setCallbackData("weather-2");
+        threeDaysButton.setCallbackData("weather-4");
+        fiveDaysButton.setCallbackData("weather-6");
 
         List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
         keyboardButtonsRow1.add(tomorrowButton);

@@ -28,13 +28,13 @@ public class WeatherCallbackQueryHandler implements CallbackQueryHandler{
         TelegramUser user = new TelegramUser();
         Message messageToUpdate = callbackQuery.getMessage();
 
-        if (1 == callbackDays) {
+        if (2 == callbackDays) {
             return getEditMessageText(callbackDays, user, messageToUpdate);
 
-        } else if (3 == callbackDays) {
+        } else if (4 == callbackDays) {
             return getEditMessageText(callbackDays, user, messageToUpdate);
 
-        } else if (5 == callbackDays) {
+        } else if (6 == callbackDays) {
             return getEditMessageText(callbackDays, user, messageToUpdate);
         }
         return null;

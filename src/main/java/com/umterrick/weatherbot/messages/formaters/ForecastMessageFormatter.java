@@ -29,7 +29,7 @@ public class ForecastMessageFormatter {
 
         message.append("**").append(weatherData.getLocation().getName()).append("**\n");
 
-        for (int i = 0; i < days; i++) {
+        for (int i = 1; i < days; i++) {
             DayForecast forecastDay = weatherData.getForecast().getForecastItems().get(i).getDay();
             message.append(weatherData.getForecast().getForecastItems().get(i).getDate()).append(":\n");
             message.append("Мін/макс температура: ")
@@ -38,9 +38,9 @@ public class ForecastMessageFormatter {
             message.append("Кількість опадів протягом дня: ").append(forecastDay.getTotalPrecipMm()).append("мм").append("\n");
             message.append("Макс. швидкість вітру: ").append(forecastDay.getMaxWindKph()).append(" км/год\n");
             message.append("UV: ").append(forecastDay.getUv()).append("\n");
-            message.append("\n");
             message.append("Рекомендація від штучного інтелекту:");
             message.append(chatGptRequest.chatGptGetForecastRec(message.toString()));
+            message.append("\n");
         }
 
         return message.toString();
